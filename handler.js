@@ -7,8 +7,11 @@ const requestHandler = (req, res) => {
 	console.log(`${method} ${url} ${statusCode}`);
 
 	let filePath = '.' + url;
+
 	if (filePath === './') {
 		filePath = './public_html/index.html';
+	} else if (filePath === './submit' && method === 'POST') {
+		filePath = './public_html/success.html'
 	}
 
 	fs.exists(filePath, (exists) => {
@@ -19,6 +22,7 @@ const requestHandler = (req, res) => {
 
 		const extension = path.extname(filePath);
 		let contentType = 'text/html';
+		
 		switch (extension) {
 	        case '.js':
 	            contentType = 'text/javascript';
@@ -38,12 +42,6 @@ const requestHandler = (req, res) => {
 			}
 		})
 	});
-
-	if (url === '/submit' && method === 'POST') {
-	    	// console.log('Hello World')
-	    	res.write('Success!');
-	    	res.end();
-	    }
 }
 
 module.exports = requestHandler;
