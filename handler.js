@@ -20,7 +20,7 @@ const requestHandler = (req, res) => {
 		const extension = path.extname(filePath);
 		let contentType = 'text/html';
 		switch (extension) {
-			case '.js':
+	        case '.js':
 	            contentType = 'text/javascript';
 	            break;
 	        case '.css':
